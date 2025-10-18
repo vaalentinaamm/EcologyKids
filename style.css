@@ -1,0 +1,378 @@
+body {
+  background-image: url('img/landscape.jpg');
+  background-size: cover;        /* La imagen se ajusta a toda la pantalla */
+  background-position: center;   /* Centra la imagen */
+  background-repeat: no-repeat;  /* Evita que se repita */
+  background-attachment: fixed;  /* Para que se vea tipo fondo fijo */
+  font-family: 'Comic Neue', sans-serif;
+}
+
+
+header {
+  background-color: #6AA84F;
+  padding: 20px;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.steve {
+  width: 180px;
+  margin-top: 30px;
+}
+
+.dialogo {
+  background-color: #C3E6CB;
+  border: 3px solid #5B8C5A;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+button {
+  background-color: #6AA84F;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #4E8238;
+}
+
+.selector-personaje {
+  margin-bottom: 15px;
+  font-family: "Comic Sans MS", sans-serif;
+  color: #004d00;
+}
+
+#personaje {
+  margin-left: 10px;
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid #009933;
+}
+#imagenPersonaje {
+  width: 180px;        /* ancho */
+  height: auto;        /* mantiene la proporción */
+  display: block;      /* para centrarlo */
+  margin: 0 auto;      /* centra horizontalmente */
+  border-radius: 10px; /* bordes un poco redondeados */
+}
+/* Ajuste específico para Alex */
+.character-image.alex {
+  width: 120px; /* Alex un poco más pequeña */
+}
+/* Animación para Steve */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+.character-image.steve {
+  animation: float 2.5s ease-in-out infinite;
+}
+main {
+  background-color: rgba(255, 255, 255, 0.65); /* Fondo blanco translúcido */
+  border-radius: 15px;
+  padding: 20px;
+  width: 250px;            /* 🔹 ancho más pequeño */
+  margin: 40px auto;       /* 🔹 centrado */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  text-align: center;      /* centra texto e imagen */
+}
+
+/* 🌟 Marca personal con efecto glow */
+#marca, footer {
+  position: fixed;
+  bottom: 10px;
+  left: 15px;
+  font-size: 12px;
+  color: white; /* Blanco puro */
+  font-weight: bold;
+  pointer-events: none;
+  text-shadow: 
+    0 0 4px rgba(255, 255, 255, 0.6),
+    0 0 8px rgba(255, 255, 255, 0.5),
+    0 0 12px rgba(255, 255, 255, 0.4);
+  animation: glowPulse 3s ease-in-out infinite; /* suave animación */
+}
+
+/* ✨ Animación suave para que el brillo respire */
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow:
+      0 0 4px rgba(255, 255, 255, 0.6),
+      0 0 8px rgba(255, 255, 255, 0.5),
+      0 0 12px rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    text-shadow:
+      0 0 8px rgba(255, 255, 255, 0.9),
+      0 0 16px rgba(255, 255, 255, 0.8),
+      0 0 24px rgba(255, 255, 255, 0.6);
+  }
+}
+  .catalogo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px 0;
+}
+
+/* 🌍 Texto principal en la introducción */
+.texto-intro {
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo negro translúcido */
+  color: white; /* Texto blanco */
+  padding: 10px 15px; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+  display: inline-block; /* Ajusta al tamaño del contenido */
+  font-size: 1.1em;
+  margin-bottom: 15px; /* Separación entre bloques */
+}
+.tarjeta {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  border: 3px solid #6AA84F;
+  border-radius: 15px;
+  width: 260px;
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease;
+}
+
+.tarjeta:hover {
+  transform: scale(1.05);
+}
+.tarjeta img {
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+/* Contenedor que centra las tarjetas */
+.tarjetas-reciclaje {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px; /* Espacio entre tarjetas */
+  margin-top: 30px;
+}
+
+/* Tarjetas blancas (puedes ajustar si ya tenías el estilo anterior) */
+.tarjetaInfo {
+  background-color: white;
+  color: black;
+  border: 3px solid #6AA84F;
+  border-radius: 15px;
+  width: 320px;
+  text-align: left;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjetaInfo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para las listas dentro de las tarjetas */
+.tarjetaInfo ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.tarjetaInfo li {
+  margin-bottom: 8px;
+  line-height: 1.5em;
+}
+
+#botonVolver {
+  background-color: #6AA84F;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: background-color 0.3s;
+}
+
+#botonVolver:hover {
+  background-color: #4E8238;
+}
+.oculto {
+  display: none;
+
+  #botonJugar {
+  background-color: #28a745;
+  color: white;
+  font-size: 1.1em;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 20px;
+}
+#botonJugar:hover {
+  background-color: #34d058;
+  transform: scale(1.05);
+}
+
+}
+/* 🎮 Contenedor principal del minijuego */
+#miniJuego {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 50px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 25px;
+  width: 80%;
+  max-width: 900px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  text-align: center;
+}
+
+/* 🔹 Área de los objetos: fija la altura y evita saltos */
+.objetos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+  min-height: 150px;
+  height: 150px; /* 🔒 Altura fija: no cambia aunque desaparezcan imágenes */
+  overflow: hidden; /* evita que el contenido cambie el tamaño */
+}
+.objetos img.oculto {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Imágenes de los objetos */
+.objetos img {
+  width: 80px;
+  cursor: grab;
+  transition: transform 0.2s;
+  /* 🔹 Mantiene el espacio aunque la imagen desaparezca */
+.objetos img.oculto {
+  visibility: hidden;
+  pointer-events: none;
+}
+}
+.objetos img:active {
+  transform: scale(1.15);
+}
+
+/* ♻️ Canecas o contenedores */
+.contenedores {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 50px;
+  width: 100%;
+  flex-wrap: wrap;
+  min-height: 180px; /* mantiene la posición estable */
+}
+
+/* Cada caneca */
+.basurero {
+  border: 3px dashed rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  padding: 15px;
+  width: 130px;
+  background: rgba(0,0,0,0.35);
+  transition: background 0.3s, transform 0.2s;
+  text-align: center;
+}
+
+.basurero:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.05);
+}
+
+.basurero img {
+  width: 90px;
+  user-select: none;
+}
+/* 🔧 Arreglar movimiento del layout */
+#juego {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: nowrap; /* no permite que se reacomoden */
+  gap: 60px;
+}
+
+.objetos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  gap: 15px;
+  width: 300px; /* espacio fijo para las imágenes */
+  min-height: 250px; /* mantiene altura aunque se borren */
+}
+
+.contenedores {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  width: 400px; /* mantiene ancho constante */
+}
+
+/* ✨ Texto del juego */
+#mensajeJuego {
+  font-size: 1.2em;
+  margin-top: 15px;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px 16px;
+  border-radius: 10px;
+}
+
+#puntaje {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-top: 10px;
+  color: #d4edda;
+}
+
+/* 🔙 Botón volver */
+#botonVolver {
+  background-color: #6AA84F;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 25px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+#botonVolver:hover {
+  background-color: #4E8238;
+  transform: scale(1.05);
+}
