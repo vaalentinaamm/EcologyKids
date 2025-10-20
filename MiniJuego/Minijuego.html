@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎮 Mini Juego de Reciclaje</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: url("img/fondo_minecraft.jpg") center/cover no-repeat;
+      color: white;
+      font-family: "Comic Sans MS", sans-serif;
+      text-align: center;
+    }
+
+    #miniJuego {
+      margin-top: 60px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+      display: inline-block;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    #juego {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .objetos img {
+      width: 70px;
+      cursor: grab;
+      transition: transform 0.2s;
+    }
+    .objetos img:active {
+      transform: scale(1.2);
+    }
+
+    .contenedores {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .basurero {
+      border: 2px dashed rgba(255, 255, 255, 0.4);
+      border-radius: 15px;
+      padding: 10px;
+      width: 120px;
+      background: rgba(0, 0, 0, 0.3);
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .basurero img {
+      width: 80px;
+    }
+    .basurero:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    #mensajeJuego {
+      font-size: 1.2em;
+      margin-top: 15px;
+    }
+
+    #puntaje {
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-top: 10px;
+    }
+
+    #volverBtn {
+      background-color: #00b4d8;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 30px;
+      cursor: pointer;
+      font-size: 1.1em;
+      transition: background 0.3s, transform 0.2s;
+    }
+    #volverBtn:hover {
+      background-color: #0096c7;
+      transform: scale(1.05);
+    }
+
+    /* ✨ Partículas animadas */
+    .particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: gold;
+      border-radius: 50%;
+      animation: sparkle 1s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes sparkle {
+      0% { opacity: 1; transform: translate(0, 0) scale(1); }
+      100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(0); }
+    }
+  </style>
+</head>
+<body>
+  <section id="miniJuego">
+    <h1>🎮 ¡Pon en práctica lo que aprendiste!</h1>
+    <p>Arrastra cada objeto al contenedor correcto y gana puntos 🌟</p>
+
+    <div id="juego">
+  <div class="objetos">
+    <img src="../img/BotellaAgua.jpeg" class="objeto" draggable="true" data-tipo="reciclable" alt="Botella">
+    <img src="../img/Papel.jpeg" class="objeto" draggable="true" data-tipo="reciclable" alt="Papel">
+    <img src="../img/ManzanaMordida.jpeg" class="objeto" draggable="true" data-tipo="organico" alt="Restos de comida">
+    <img src="../img/Esqueleto.jpeg" class="objeto" draggable="true" data-tipo="inorganico" alt="Lata no reciclable">
+    <img src="../img/Lata.jpeg" class="objeto" draggable="true" data-tipo="reciclable" alt="Lata">
+    <img src="../img/Periodico.jpeg" class="objeto" draggable="true" data-tipo="reciclable" alt="Papel">
+    <img src="../img/Zanahoria.jpeg" class="objeto" draggable="true" data-tipo="organico" alt="Restos de comida">
+    <img src="../img/Caja.jpeg" class="objeto" draggable="true" data-tipo="reciclable" alt="Caja">
+  </div>
+
+  <div class="contenedores">
+    <!-- Basurero verde: orgánicos -->
+    <div class="basurero" data-tipo="organico">
+      <img src="../img/CanecaVerde.png" alt="Basurero verde">
+      <p>Orgánicos</p>
+    </div>
+
+    <!-- Basurero blanco: reciclables (latas/plásticos) -->
+    <div class="basurero" data-tipo="reciclable">
+      <img src="../img/CanecaAzul.png" alt="Basurero blanco">
+      <p>Reciclables</p>
+    </div>
+
+    <!-- Basurero gris/negro: inorgánicos no reciclables -->
+    <div class="basurero" data-tipo="inorganico">
+      <img src="../img/CanecaNegra.png" alt="Basurero gris">
+      <p>No reciclables</p>
+    </div>
+  </div>
+</div>
+
+
+    <p id="mensajeJuego">Arrastra los objetos al basurero correcto 🧹</p>
+    <p id="puntaje">Puntaje: <span>0</span></p>
+
+    <button id="volverBtn" onclick="window.location.href='../index.html'">⬅️ Volver al inicio</button>
+  </section>
+
+  <script>
+    let puntaje = 0;
+    const objetos = document.querySelectorAll(".objeto");
+    const basureros = document.querySelectorAll(".basurero");
+    const mensaje = document.getElementById("mensajeJuego");
+    const puntajeTexto = document.querySelector("#puntaje span");
+
+    objetos.forEach(objeto => {
+      objeto.addEventListener("dragstart", e => {
+        e.dataTransfer.setData("tipo", objeto.dataset.tipo);
+        e.target.classList.add("arrastrando");
+      });
+      objeto.addEventListener("dragend", e => {
+        e.target.classList.remove("arrastrando");
+      });
+    });
+
+   basureros.forEach(basurero => {
+  basurero.addEventListener("dragover", e => e.preventDefault());
+  basurero.addEventListener("drop", e => {
+    const tipoObjeto = e.dataTransfer.getData("tipo");
+    const tipoBasurero = basurero.dataset.tipo;
+
+    if (tipoObjeto === tipoBasurero) {
+      puntaje += 10;
+      mensaje.textContent = "✅ ¡Bien hecho!";
+      mensaje.style.color = "#00ff99";
+      puntajeTexto.textContent = puntaje;
+      crearParticulas(basurero);
+
+      // 🔹 Eliminar la imagen correcta (la que se soltó)
+      const objetoArrastrado = document.querySelector(".arrastrando");
+      if (objetoArrastrado) {
+        objetoArrastrado.style.transition = "opacity 0.4s";
+        objetoArrastrado.style.opacity = "0";
+        setTimeout(() => objetoArrastrado.remove(), 400);
+      }
+
+    } else {
+      mensaje.textContent = "❌ ¡Ups! Ese no es el contenedor correcto.";
+      mensaje.style.color = "#ff5555";
+    }
+
+    if (puntaje === 30) {
+      mensaje.textContent = "🎉 ¡Excelente! Clasificaste toda la basura correctamente.";
+      mensaje.style.color = "#ffd700";
+    }
+  });
+});
+
+
+    // ✨ Animación de partículas
+    function crearParticulas(basurero) {
+      for (let i = 0; i < 12; i++) {
+        const p = document.createElement("div");
+        p.classList.add("particle");
+        p.style.setProperty("--x", `${(Math.random() - 0.5) * 100}px`);
+        p.style.setProperty("--y", `${(Math.random() - 0.5) * 100}px`);
+        basurero.appendChild(p);
+        setTimeout(() => p.remove(), 1000);
+      }
+    }
+  </script>
+</body>
+</html>
+
